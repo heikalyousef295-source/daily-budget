@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محسب المصاريف السريع</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>💰 مصاريفي اليومية</h1>
+      <button id="budget-settings-btn" class="icon-btn" title="تعديل الميزانية">⚙️</button>
+    </header>
+
+    <section class="budget-card">
+      <div class="budget-info">
+        <div>
+          <span class="label">المتبقي للشهر</span>
+          <h2 id="remaining-budget">0 ج.م</h2>
+        </div>
+        <div>
+          <span class="label">الحد اليومي الموصى به</span>
+          <h3 id="daily-limit">0 ج.م/يوم</h3>
+        </div>
+      </div>
+      
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div class="budget-subtext">
+        <span id="spent-today">صرفت النهاردة: 0 ج.م</span>
+        <span id="total-budget-display">من أصل: 0 ج.م</span>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3>➕ إضافة مصروف سريع</h3>
+      <form id="expense-form">
+        <div class="form-row">
+          <input type="number" id="amount" placeholder="المبلغ (مثال: 50)" step="any" required>
+          <select id="category" required>
+            <option value="" disabled selected>إختر الفئة</option>
+            <option value="أكل وشرب">🍔 أكل وشرب</option>
+            <option value="مواصلات">🚕 مواصلات</option>
+            <option value="فواتير">🧾 فواتير والاشتراكات</option>
+            <option value="تسوق">🛍️ تسوق</option>
+            <option value="ترفيه">☕ ترفيه وسينما</option>
+            <option value="أخرى">📦 أخرى</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <input type="text" id="note" placeholder="ملاحظة سريعة (اختياري: غداء، تاكسي...)">
+          <button type="submit" class="btn-primary">حفظ</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="grid-2">
+      <section class="card">
+        <h3>📊 توزيع المصاريف</h3>
+        <div class="chart-container">
+          <canvas id="expensesChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>📝 سجل المصاريف الأخيرة</h3>
+        <ul id="expense-list" class="expense-list"></ul>
+      </section>
+    </div>
+  </div>
+
+  <div id="budget-modal" class="modal">
+    <div class="modal-content">
+      <h3>تعديل الميزانية الشهرية</h3>
+      <input type="number" id="new-budget-input" placeholder="أدخل الميزانية الكلية الجديدة">
+      <div class="modal-actions">
+        <button id="save-budget-btn" class="btn-primary">حفظ</button>
+        <button id="close-modal-btn" class="btn-secondary">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
