@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // تقديم الملفات الثابتة من فولدر public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 let expenses = [];
 
