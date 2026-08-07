@@ -9,6 +9,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 let expenses = [];
 
+app.get('/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'favicon.png'));
+});
+
 app.get('/api/expenses', (req, res) => {
     res.json(expenses);
 });
