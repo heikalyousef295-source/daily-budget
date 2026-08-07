@@ -3,8 +3,6 @@ const path = require('path');
 const app = express();
 
 app.use(express.json());
-
-// تقديم الملفات الثابتة من المجلد الرئيسي مباشرة
 app.use(express.static(__dirname));
 
 let expenses = [];
