@@ -7,6 +7,11 @@ app.use(express.static(__dirname));
 
 let expenses = [];
 
+// مسار صريح وثابت للـ favicon لمنع ظهور أي إيرور 404
+app.get('/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'favicon.png'));
+});
+
 app.get('/api/expenses', (req, res) => {
     res.json(expenses);
 });
