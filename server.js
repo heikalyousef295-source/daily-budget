@@ -4,14 +4,10 @@ const app = express();
 
 app.use(express.json());
 
-// تقديم الملفات الثابتة من فولدر public
+// تقديم الملفات الثابتة من المجلد الرئيسي مباشرة
 app.use(express.static(__dirname));
 
 let expenses = [];
-
-app.get('/favicon.png', (req, res) => {
-    res.sendFile(path.join(__dirname, 'favicon.png'));
-});
 
 app.get('/api/expenses', (req, res) => {
     res.json(expenses);
@@ -26,27 +22,10 @@ app.post('/api/expenses', (req, res) => {
         _id: Date.now().toString(),
         amount: Number(amount),
         category,
-        note: note || '',
-        date: new Date()
+        note: note || ''
     };
-    expenses.unshift(newExpense);
+    expenses.push(newExpense);
     res.status(201).json(newExpense);
-});
-
-app.delete('/api/expenses/:id', (req, res) => {
-    const { id } = req.params;
-    expenses = expenses.filter(exp => exp._id !== id);
-    res.json({ message: 'تم حذف المصروف بنجاح' });
-});
-
-// إرجاع صفحة index.html لأي مسار
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;
