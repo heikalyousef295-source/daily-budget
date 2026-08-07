@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 
-// توجيه سيرفر Express للوصول لملفات فولدر public
+// تقديم الملفات الثابتة من فولدر public
 app.use(express.static(path.join(__dirname, 'public')));
 
 let expenses = [];
@@ -35,9 +35,9 @@ app.delete('/api/expenses/:id', (req, res) => {
     res.json({ message: 'تم حذف المصروف بنجاح' });
 });
 
-// إرجاع صفحة index.html لأي مسار رئيسي
+// إرجاع صفحة index.html لأي مسار
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
